@@ -34,42 +34,30 @@ namespace EFCoreWinForm
                 // Get the 'Id' value from the 'Id' column in the selected row
                 int selectedId = Convert.ToInt32(dgvEntities.Rows[selectedRowIndex].Cells["Id"].Value);
 
-                // Get the user-updated value from the input field
-                string updatedFirstName = txtFirstName.Text;
-                string updatedLastName = txtLastName.Text;
-                string updatedGender = txtGender.Text;
-                string updatedCity = txtCity.Text;
-                string updatedIsActive = txtIsActive.Text;
-                // Find the employee in the database
-                var employeeToUpdate = _dbContext.Employees.Find(selectedId);
+                // Get the user-updated values from the input fields
 
-                // Check if the employee is found
-                if (employeeToUpdate != null)
+                // Get the user-updated values from the selected cell
+                string updatedFirstName = dgvEntities.Rows[selectedRowIndex].Cells["FirstName"].EditedFormattedValue?.ToString() ?? "";
+                string updatedLastName = dgvEntities.Rows[selectedRowIndex].Cells["LastName"].EditedFormattedValue?.ToString() ?? "";
+                string updatedGender = dgvEntities.Rows[selectedRowIndex].Cells["Gender"].EditedFormattedValue?.ToString() ?? "";
+                string updatedCity = dgvEntities.Rows[selectedRowIndex].Cells["City"].EditedFormattedValue?.ToString() ?? "";
+                string updatedIsActive = dgvEntities.Rows[selectedRowIndex].Cells["IsActive"].EditedFormattedValue?.ToString() ?? "";
+
+
+                Entities? item = _dbContext.Employees.FirstOrDefault(x => x.Id == selectedId);
+                if (item is null)
                 {
-                    // Update the FirstName property
-                    employeeToUpdate.FirstName = updatedFirstName;
-                    // Update the properties
-
-                    employeeToUpdate.LastName = updatedLastName;
-                    employeeToUpdate.Gender = updatedGender;
-                    employeeToUpdate.City = updatedCity;
-                    employeeToUpdate.IsActive = updatedIsActive;
-                    // Save changes to the database
-                    _dbContext.SaveChanges();
-
-                    // Refresh the DataGridView
-                    btnSlect_Click(sender, e);
-
-                    MessageBox.Show("Update successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Console.WriteLine("No Data found");
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Employee not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a cell before updating.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                item.FirstName = updatedFirstName;
+                item.LastName = updatedLastName;
+                item.Gender = updatedGender;
+                item.City = updatedCity;
+                item.IsActive = updatedIsActive;
+                int result = _dbContext.SaveChanges();
+                string message = result > 0 ? "Updating Successful." : "Updating Failed";
+                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -89,6 +77,33 @@ namespace EFCoreWinForm
             string message = result > 0 ? "Saving Successful." : "Saving Failed";
 
             Console.WriteLine(message);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvEntities.SelectedCells.Count > 0)
+            {
+                // Get the selected cell's row index
+                int selectedRowIndex = dgvEntities.SelectedCells[0].RowIndex;
+
+                // Get the 'Id' value from the 'Id' column in the selected row
+                int selectedId = Convert.ToInt32(dgvEntities.Rows[selectedRowIndex].Cells["Id"].Value);
+
+                // Get the user-updated values from the input fields
+
+               
+
+                Entities? item = _dbContext.Employees.FirstOrDefault(x => x.Id == selectedId);
+                if (item is null)
+                {
+                    Console.WriteLine("No Data found");
+                    return;
+                }
+                _dbContext.Employees.Remove(item);
+                int result = _dbContext.SaveChanges();
+                string message = result > 0 ? "Deleting  Successful." : "Deleting Failed";
+                MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
