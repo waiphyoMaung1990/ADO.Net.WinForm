@@ -12,6 +12,7 @@ namespace DapperWinForm
     public partial class Form1 : Form
     {
         private readonly IDbConnection dbConnection;
+       
 
         public Form1()
         {

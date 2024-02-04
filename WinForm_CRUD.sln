@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADO.Net.WinForm", "ADO.Net.WinForm\ADO.Net.WinForm.csproj", "{7B99A834-13C5-448C-9A0B-11235F82FE2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperWinForm", "DapperWinForm\DapperWinForm.csproj", "{108A90E1-A24A-4E3A-BB26-9FE7BF4AA99D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperWinForm", "DapperWinForm\DapperWinForm.csproj", "{108A90E1-A24A-4E3A-BB26-9FE7BF4AA99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreWinForm", "EFCoreWinForm\EFCoreWinForm.csproj", "{E3A43F92-A71F-43DD-AF12-02C4DD5B75A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{108A90E1-A24A-4E3A-BB26-9FE7BF4AA99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{108A90E1-A24A-4E3A-BB26-9FE7BF4AA99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{108A90E1-A24A-4E3A-BB26-9FE7BF4AA99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3A43F92-A71F-43DD-AF12-02C4DD5B75A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A43F92-A71F-43DD-AF12-02C4DD5B75A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A43F92-A71F-43DD-AF12-02C4DD5B75A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A43F92-A71F-43DD-AF12-02C4DD5B75A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
